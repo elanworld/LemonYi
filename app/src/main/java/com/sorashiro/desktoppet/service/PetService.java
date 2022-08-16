@@ -41,8 +41,13 @@ public class PetService extends Service {
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        String act = intent.getStringExtra("act");
         ViewManager viewManager = ViewManager.getInstance(PetService.this);
-        viewManager.showPetView();
+        if ("off".equals(act)) {
+            viewManager.removeAllPetView();
+        } else {
+            viewManager.showPetView();
+        }
         return super.onStartCommand(intent, flags, startId);
     }
 }
